@@ -1,0 +1,94 @@
+@import url("../../index.css");
+
+.mainContainer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.navigationBar {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.logoAndNavlinkContainer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.logoContainer,
+.navigationLink,
+.logout {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  color: #707070;
+  padding: 0rem 2rem;
+}
+
+.navigationLink,
+.logout {
+  height: 2.5rem;
+}
+
+.logoIcon,
+.logoutIcon,
+.navlinkIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.logoutIcon img {
+  height: 24px;
+  width: 24px;
+}
+
+.logoText {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.navigationLinksContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.logoutContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  align-self: flex-end;
+}
+
+.selected {
+  background-color: #4392ed20;
+}

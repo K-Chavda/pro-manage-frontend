@@ -1,0 +1,27 @@
+@import url("../../index.css");
+
+.selectContainer {
+  position: relative;
+  display: inline-block;
+  font-family: Arial, sans-serif;
+}
+
+.selectContainer select {
+  background-color: white;
+  border: none;
+  font-size: 16px;
+  padding: 8px 12px;
+  cursor: pointer;
+  outline: none;
+}
+
+.selectContainer select:focus {
+  outline: none;
+}
+
+.selectContainer select option {
+  background-color: white;
+  color: black;
+  font-size: 16px;
+  font-weight: normal;
+}

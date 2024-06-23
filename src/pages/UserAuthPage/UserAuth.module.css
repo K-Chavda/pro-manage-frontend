@@ -1,0 +1,81 @@
+@import url("../../index.css");
+
+.mainContainer {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heroContainer {
+  height: 100%;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #17a2b8;
+}
+
+.heroImageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.heroImageContainer img {
+  position: relative;
+  top: auto;
+  left: auto;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.heroImageContainer::after {
+  content: "";
+  position: absolute;
+  top: 15%;
+  left: auto;
+  width: 60%;
+  height: 60%;
+  border-radius: 100%;
+  background-color: #317f8b;
+}
+
+.heroTextContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.heroTitle {
+  font-size: 32px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.heroSubTitle {
+  font-size: 18px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.contentContainer {
+  height: 100%;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

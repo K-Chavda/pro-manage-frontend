@@ -1,0 +1,107 @@
+@import url("../../index.css");
+
+.mainContainer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0rem 2rem;
+  gap: 3rem;
+}
+
+.infoContainer {
+  width: 100%;
+  height: 12%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.userNameAndHeadingContainer
+/* .dateAndFilterContainer  */ {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.userNameContainer,
+.headingContainer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.userName {
+  font-size: 20px;
+  font-weight: 600;
+  color: #000000;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+}
+
+.headingContainer {
+  font-size: 28px;
+  font-weight: 500;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.dateAndFilterContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.dateContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.dateContainer,
+.filterContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.date {
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #707070;
+}
+
+.filter {
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tasksContainer {
+  max-width: 100%;
+  height: 85%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow-x: scroll;
+  gap: 1rem;
+}

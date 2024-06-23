@@ -1,0 +1,45 @@
+@import url("../../index.css");
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem 0rem;
+  width: 100%;
+  height: 100%;
+}
+
+.button {
+  width: 100%;
+  height: 60%;
+  border-radius: 10rem;
+  cursor: pointer;
+  padding: 0rem 2.5rem;
+  outline: none;
+  transition: border 0.3s ease-in-out;
+  background-color: transparent;
+}
+
+.primaryButton {
+  border: 2px solid transparent;
+  background-color: #17a2b8;
+  color: #ffffff;
+}
+
+.primaryButton:hover {
+  background-color: #1490a3;
+  color: #ffffff;
+}
+
+.secondaryButton {
+  border: 2px solid #17a2b8;
+  background-color: transparent;
+  color: #17a2b8;
+}
+
+.secondaryButton:hover {
+  border: 2px solid #1490a3;
+  background-color: #fffbfb;
+  color: #1490a3;
+}
