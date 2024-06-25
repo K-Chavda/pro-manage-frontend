@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Dashboard.module.css";
+import { format } from "date-fns";
 
 // Components
 import SelectList from "../../components/SelectList/SelectList";
@@ -11,6 +12,14 @@ import Tasks from "../TasksPage/Tasks";
 import formatDate from "../../utils/formatDate";
 
 function Dashboard() {
+  const [filterValue, setFilterValue] = useState(
+    localStorage.getItem("taskFilter") || "This week"
+  );
+
+  useEffect(() => {
+    localStorage.setItem("taskFilter", filterValue);
+  }, [filterValue]);
+
   return (
     <>
       <div className={styles.mainContainer}>
@@ -25,15 +34,14 @@ function Dashboard() {
           </div>
           <div className={styles.dateAndFilterContainer}>
             <div className={styles.dateContainer}>
-              <span className={styles.date}>{formatDate(new Date())}</span>
+              <span className={styles.date}>{format(new Date(), "PPP")}</span>
             </div>
             <div className={styles.filterContainer}>
               <SelectList
-                defaultValue={"This week"}
                 options={["Today", "This week", "This month"]}
-                onChange={(value) => console.log(value)}
+                value={filterValue}
+                onChange={setFilterValue}
               />
-              {/* <span className={styles.filter}>This week</span> */}
             </div>
           </div>
         </div>

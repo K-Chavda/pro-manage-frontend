@@ -1,28 +1,46 @@
-import React, { useState, useEffect } from "react";
-import styles from "./SelectList.module.css"; // Import the CSS file
+import { useEffect, useState } from "react";
+import styles from "./SelectList.module.css";
+import { IoIosArrowDown } from "react-icons/io";
 
-const SelectList = ({ defaultValue, options, onChange }) => {
-  const [selectedOption, setSelectedOption] = useState(defaultValue);
+const SelectList = ({ options, value, onChange }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
 
-  useEffect(() => {
-    setSelectedOption(defaultValue);
-  }, [defaultValue]);
+  const toggleList = () => {
+    setIsExpanded(!isExpanded);
+  };
 
-  const handleChange = (event) => {
-    const newValue = event.target.value;
-    setSelectedOption(newValue);
-    onChange(newValue);
+  const handleSelect = (option) => {
+    onChange(option);
+    toggleList();
   };
 
   return (
-    <div className={styles.selectContainer}>
-      <select id="select-list" value={selectedOption} onChange={handleChange}>
-        {options.map((option, index) => (
-          <option key={index} value={option}>
+    <div className={styles.customSelect}>
+      <div className={styles.selectWrapper} onClick={toggleList}>
+        <div className={styles.selectedItem}>
+          {value ? value : "Select an option"}
+        </div>
+        <div
+          className={`${styles.dropdownIcon} ${
+            isExpanded ? styles.expandedIcon : ""
+          }`}
+        >
+          <IoIosArrowDown />
+        </div>
+      </div>
+      <div
+        className={`${styles.dropdownContent} ${isExpanded ? styles.show : ""}`}
+      >
+        {options.map((option) => (
+          <div
+            key={option}
+            className={styles.dropdownItem}
+            onClick={() => handleSelect(option)}
+          >
             {option}
-          </option>
+          </div>
         ))}
-      </select>
+      </div>
     </div>
   );
 };

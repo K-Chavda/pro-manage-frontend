@@ -1,0 +1,46 @@
+@import url("../../../index.css");
+
+.taskCheckList {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #e2e2e2;
+}
+
+.taskCheckListLabel {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.checkList {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 2px solid #e2e2e2;
+  border-radius: 6px;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+}
+
+.checkList:checked {
+  background-color: #17a2b8;
+  border-color: #e2e2e2;
+}
+
+.checkList:checked::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - 2px);
+  left: 50%;
+  width: 4px;
+  height: 8px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
