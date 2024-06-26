@@ -1,0 +1,308 @@
+@import url("../../../index.css");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+
+.card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 20px;
+  background-color: #ffffff;
+}
+
+.cardHeaderContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 2;
+}
+
+.taskPriorityAndActionsContainer {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.taskPriorityAndInitialContainer,
+.taskActionsContainer {
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.taskActionsContainer:hover {
+  cursor: pointer;
+}
+
+.taskPriorityAndInitialContainer {
+  font-size: 8px;
+  font-weight: 500;
+}
+
+.priorityIcon {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.high {
+  background-color: #cf3636;
+}
+
+.moderate {
+  background-color: rgb(99, 99, 255);
+}
+
+.low {
+  background-color: #63c05b;
+}
+
+.assigneeInitials {
+  font-family: "DM Sans", sans-serif;
+  font-size: 7px;
+  font-weight: 400;
+  background-color: #ffebeb;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.taskTitleContainer {
+  width: 100%;
+  height: 70%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.taskTitle {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.taskCheckListContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.checkListExpand {
+  width: 100%;
+  max-height: 25px;
+  min-height: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkListCountContainer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.checkListCount {
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 1px;
+}
+
+.checkListExpandIconContainer {
+  width: 100%;
+  height: 100%;
+  max-width: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eeecec;
+  border-radius: 3px;
+  color: #767575;
+}
+
+.checkListExpandIcon {
+  width: 100%;
+  height: 100%;
+  max-width: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.checkListCollapseIcon {
+  transform: rotate(180deg);
+}
+
+.checkListContainer {
+  width: 100%;
+  display: none;
+  gap: 0.5rem 0rem;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 10px;
+}
+
+.checkListContainerExpanded {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0.5rem 0rem;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 10px;
+}
+
+.taskCheckList {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #e2e2e2;
+}
+
+.taskCheckListLabel {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.checkList {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 2px solid #e2e2e2;
+  border-radius: 6px;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+}
+
+.checkList:checked {
+  background-color: #17a2b8;
+  border-color: #e2e2e2;
+}
+
+.checkList:checked::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - 2px);
+  left: 50%;
+  width: 4px;
+  height: 8px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.taskCheckListDescription {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.taskDueDateAndStatusContainer {
+  width: 100%;
+  min-height: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 8px;
+  font-weight: 500;
+  flex: 1;
+}
+
+.taskDueDateContainer {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 8px;
+  font-weight: 500;
+}
+
+.taskDueDate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #dbdbdb;
+  color: #5a5a5a;
+  height: 100%;
+  border-radius: 8px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.taskCompleted {
+  background-color: #63c05b;
+  color: #ffffff;
+}
+
+.taskInCompleted {
+  background-color: #cf3636;
+  color: #ffffff;
+}
+
+.taskStatusContainer {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 8px;
+  font-weight: 500;
+  gap: 0.5rem;
+}
+
+.taskStatus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eeecec;
+  color: #767575;
+  height: 100%;
+  border-radius: 8px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
