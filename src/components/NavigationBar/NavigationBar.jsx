@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./NavigationBar.module.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+
+// Component
+import ConfirmDialog from "../ConfirmDialog/ConfirmDialog";
 
 // Icons
 import {
@@ -12,6 +15,18 @@ import {
 } from "../../assets/icons/index";
 
 function NavigationBar() {
+  const navigate = useNavigate();
+  const [isModelOpen, setIsModelOpen] = useState(false);
+
+  const handleLogoutClick = () => {
+    setIsModelOpen(true);
+  };
+
+  const logoutUser = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+
   return (
     <>
       <div className={styles.mainContainer}>
@@ -66,15 +81,25 @@ function NavigationBar() {
             </div>
           </div>
           <div className={styles.logoutContainer}>
-            <NavLink className={styles.logout} to="/login">
+            <div className={styles.logout}>
               <span className={styles.logoutIcon}>
                 <img src={logoutIcon} alt="pro-manage" />
               </span>
-              <span className={styles.logoutText}>Logout</span>
-            </NavLink>
+              <span className={styles.logoutText} onClick={handleLogoutClick}>
+                Logout
+              </span>
+            </div>
           </div>
         </div>
       </div>
+      <ConfirmDialog
+        message="Are you sure you want to Logout?"
+        confirmButton="Yes, Logout"
+        closeButton="Cancel"
+        callBack={logoutUser}
+        isModelOpen={isModelOpen}
+        setIsModelOpen={setIsModelOpen}
+      />
     </>
   );
 }

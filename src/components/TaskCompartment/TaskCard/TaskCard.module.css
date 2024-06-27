@@ -29,6 +29,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .taskPriorityAndInitialContainer,
@@ -44,9 +45,50 @@
   cursor: pointer;
 }
 
+.moreOptionsCard {
+  position: absolute;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 20px;
+  background-color: #ffffff;
+  box-shadow: 0px 2px 22px rgba(126, 122, 122, 0.25);
+  left: 60%;
+  top: 100%;
+  z-index: 1;
+}
+
+.moreOptionsSpan {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #000000;
+}
+
+.moreOptionsHide {
+  display: none;
+}
+
+.taskActionsContainerSkeleton {
+  width: 20%;
+  height: 100%;
+}
+
 .taskPriorityAndInitialContainer {
   font-size: 8px;
   font-weight: 500;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.taskPriorityAndInitialContainerSkeleton {
+  width: 60%;
+  height: 100%;
 }
 
 .priorityIcon {
@@ -80,7 +122,8 @@
   align-items: center;
 }
 
-.taskTitleContainer {
+.taskTitleContainer,
+.taskTitleContainerSkeleton {
   width: 100%;
   height: 70%;
   display: flex;
@@ -109,6 +152,7 @@
   align-items: center;
   gap: 0.5rem;
   flex: 1;
+  transition: all 0.3s ease-in-out;
 }
 
 .checkListExpand {
@@ -123,6 +167,14 @@
 .checkListCountContainer {
   height: 100%;
   width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.checkListCountContainerSkeleton {
+  width: 60%;
+  height: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -149,6 +201,14 @@
   color: #767575;
 }
 
+.checkListExpandIconContainerSkeleton {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .checkListExpandIcon {
   width: 100%;
   height: 100%;
@@ -163,13 +223,15 @@
   transform: rotate(180deg);
 }
 
-.checkListContainer {
+.checkListContainer,
+.checkListContainerSkeleton {
   width: 100%;
   display: none;
   gap: 0.5rem 0rem;
   font-size: 14px;
   font-weight: 400;
   padding: 10px;
+  transition: all 0.3s ease-in-out;
 }
 
 .checkListContainerExpanded {
@@ -262,6 +324,14 @@
   font-weight: 500;
 }
 
+.taskDueDateContainerSkeleton {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .taskDueDate {
   display: flex;
   justify-content: center;
@@ -293,6 +363,14 @@
   font-size: 8px;
   font-weight: 500;
   gap: 0.5rem;
+}
+
+.taskStatusContainerSkeleton {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .taskStatus {

@@ -58,6 +58,11 @@
 .logoutIcon img {
   height: 24px;
   width: 24px;
+  cursor: pointer;
+}
+
+.logoutText {
+  cursor: pointer;
 }
 
 .logoText {

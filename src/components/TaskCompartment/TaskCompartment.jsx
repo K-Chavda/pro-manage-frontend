@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styles from "./TaskCompartment.module.css";
 
 // Icons
@@ -7,84 +7,94 @@ import { VscCollapseAll } from "react-icons/vsc";
 
 // Components
 import TaskCard from "./TaskCard/TaskCard";
+import TaskCardSkeleton from "./TaskCardSkeleton/TaskCardSkeleton";
+import TaskCardModel from "./TaskCardModel/TaskCardModel";
 
-function TaskCompartment({ compartmentType, allTasks, getTasks }) {
+const transformKey = (key) => key.replace(/\s+/g, "").toLowerCase();
+
+function TaskCompartment({ compartmentTypes, allTasks, getTasks }) {
+  const [isLoading, setIsLoading] = useState(true);
   const [expandedTasks, setExpandedTasks] = useState(() => {
     const storedExpandedTasks = localStorage.getItem("expandedTasks");
     return storedExpandedTasks ? JSON.parse(storedExpandedTasks) : {};
   });
 
-  // Save expanded tasks to localStorage whenever it changes
   useEffect(() => {
-    localStorage.setItem("expandedTasks", JSON.stringify());
+    localStorage.setItem("expandedTasks", JSON.stringify(expandedTasks));
   }, [expandedTasks]);
 
+  useEffect(() => {
+    const fetchTasks = async () => {
+      await getTasks();
+      setIsLoading(false);
+    };
+    fetchTasks();
+  }, [getTasks]); // This effect runs only once because getTasks is memoized
+
+  const handleCollapseAllClick = useCallback((typeKey) => {
+    setExpandedTasks((prevExpandedTasks) => ({
+      ...prevExpandedTasks,
+      [typeKey]: [],
+    }));
+  }, []);
+
   const transformedTasks = Object.keys(allTasks).reduce((acc, key) => {
-    const transformedKey = key.replace(/\s+/g, "").toLowerCase();
+    const transformedKey = transformKey(key);
     acc[transformedKey] = allTasks[key];
     return acc;
   }, {});
 
-  const handleCollapseAllClick = (type) => {
-    console.log(type);
-    toggleTaskExpansion(type);
-  };
-
-  // Toggle task card expansion
-  const toggleTaskExpansion = (type) => {
-    const updatedExpandedTasks = {
-      ...expandedTasks,
-      [type]: [],
-    };
-    console.log(updatedExpandedTasks);
-    setExpandedTasks(updatedExpandedTasks);
-
-    // Clear localStorage for this specific type
-    // localStorage.setItem("expandedTasks", JSON.stringify(updatedExpandedTasks));
-  };
-
-  console.log(expandedTasks);
+  const handleTaskAddClick = () => {};
 
   return (
     <>
-      {compartmentType.map((type) => {
-        const typeKey = type.replace(/\s+/g, "").toLowerCase();
-        return (
-          <div className={styles.taskCardContainer} key={type}>
-            <div className={styles.headerContainer}>
-              <div className={styles.statusContainer}>
-                <span className={styles.status}>{type}</span>
-              </div>
-              <div className={styles.actionsContainer}>
-                {type.toUpperCase() === "TO DO" ? (
-                  <span className={styles.actions}>
-                    <FaPlus />
+      {compartmentTypes &&
+        compartmentTypes.map((type) => {
+          const typeKey = transformKey(type);
+          return (
+            <div className={styles.taskCardContainer} key={typeKey}>
+              <div className={styles.headerContainer}>
+                <div className={styles.statusContainer}>
+                  <span className={styles.status}>{type}</span>
+                </div>
+                <div className={styles.actionsContainer}>
+                  {type.toUpperCase() === "TODO" && (
+                    <span
+                      className={styles.actions}
+                      onClick={handleTaskAddClick}
+                    >
+                      <FaPlus />
+                    </span>
+                  )}
+                  <span
+                    className={styles.actions}
+                    onClick={() => handleCollapseAllClick(typeKey)}
+                  >
+                    <VscCollapseAll />
                   </span>
-                ) : null}
-                <span
-                  className={styles.actions}
-                  onClick={() => handleCollapseAllClick(typeKey)}
-                >
-                  <VscCollapseAll />
-                </span>
+                </div>
+              </div>
+              <div className={styles.taskCards}>
+                {isLoading ? (
+                  <TaskCardSkeleton />
+                ) : (
+                  transformedTasks[typeKey]?.map((taskItem) => (
+                    <TaskCard
+                      key={taskItem._id}
+                      task={taskItem}
+                      compartmentType={compartmentTypes}
+                      getTasks={getTasks}
+                      expandedTasks={expandedTasks}
+                      setExpandedTasks={setExpandedTasks}
+                      setIsLoading={setIsLoading}
+                    />
+                  ))
+                )}
               </div>
             </div>
-            <div className={styles.taskCards}>
-              {transformedTasks[typeKey] &&
-                transformedTasks[typeKey].map((taskItem, index) => (
-                  <TaskCard
-                    key={taskItem._id}
-                    task={taskItem}
-                    compartmentType={compartmentType}
-                    getTasks={getTasks}
-                    expandedTasks={expandedTasks}
-                    setExpandedTasks={setExpandedTasks}
-                  />
-                ))}
-            </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      <TaskCardModel />
     </>
   );
 }

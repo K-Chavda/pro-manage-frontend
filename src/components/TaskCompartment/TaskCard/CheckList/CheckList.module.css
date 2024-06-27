@@ -16,6 +16,10 @@
   font-weight: 400;
 }
 
+.taskCheckListLabel:hover {
+  cursor: pointer;
+}
+
 .checkList {
   appearance: none;
   -webkit-appearance: none;

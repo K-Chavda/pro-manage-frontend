@@ -1,0 +1,75 @@
+@import url("../../../index.css");
+
+.mainContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(48, 61, 67, 0.55);
+}
+
+.taskCardModel {
+  background-color: #ffffff;
+  border-radius: 20px;
+  height: 70%;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+}
+
+.taskDetailsContainer {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.taskDetailInputContainer {
+  width: 100%;
+  height: calc(60% - 0.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.taskDetailInputContainer label {
+  width: 100%;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.required {
+  color: #ff0000;
+}
+
+.taskDetailInputContainer input {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #e2e2e2;
+  border-radius: 5px;
+}
+
+.taskDetailInputContainer input::placeholder {
+  color: #9b959f;
+}
+
+.taskPriorityInputContainer {
+  width: 100%;
+  height: calc(40% - 0.5rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
