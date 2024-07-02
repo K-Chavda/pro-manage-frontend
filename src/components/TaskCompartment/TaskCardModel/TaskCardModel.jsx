@@ -131,8 +131,6 @@ const TaskCardModel = ({
       };
 
       if (taskDetails._id) {
-        console.log(taskData.title, taskDetails.title);
-        console.log(taskDetails.owner, taskDetails.title);
         if (
           taskData.title !== taskDetails.title &&
           taskDetails.owner !== localStorage.getItem("email")
@@ -149,21 +147,41 @@ const TaskCardModel = ({
           return;
         }
 
-        const response = await updateTask({
+        const updateTaskPromise = updateTask({
           ...taskPayload,
           taskId: taskDetails._id,
+        }).then((response) => {
+          const updateCheckListPromise = updateTaskCheckList(
+            response.task._id
+          ).then((response) => {
+            setIsTaskCardModelOpen(false);
+            return response;
+          });
+
+          return response;
         });
 
-        await updateTaskCheckList(response.task._id);
-
-        showToast("Task Updated Successfully", "success");
+        promiseToast(updateTaskPromise, {
+          pending: "Updating Task Details...",
+          success: "Task Details Updated Successfully",
+        });
       } else {
-        const response = await createTask(taskPayload);
-        await createTaskCheckList(response.data.newTask._id);
+        const createTaskPromise = createTask(taskPayload).then((response) => {
+          const createCheckListPromise = createTaskCheckList(
+            response.data.newTask._id
+          ).then((response) => {
+            setIsTaskCardModelOpen(false);
+            return response;
+          });
 
-        showToast("Task Created Successfully", "success");
+          return response;
+        });
+
+        promiseToast(createTaskPromise, {
+          pending: "Creating Task...",
+          success: "Task Created Successfully",
+        });
       }
-      setIsTaskCardModelOpen(false);
     } catch (error) {
       console.error("Error saving task:", error);
     }
