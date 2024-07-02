@@ -9,6 +9,9 @@ import Analytics from "./pages/AnalyticsPage/Analytics";
 import Settings from "./pages/SettingsPage/Settings";
 import Public from "./pages/PublicPage/Public";
 
+// Components
+import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
+
 function App() {
   return (
     <>
@@ -16,10 +19,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="/*" element={<UserAuth />} />
-          <Route path="/" element={<Layout />}>
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="analytics" element={<Analytics />} />
-            <Route path="settings" element={<Settings />} />
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/" element={<Layout />}>
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="analytics" element={<Analytics />} />
+              <Route path="settings" element={<Settings />} />
+            </Route>
           </Route>
           <Route path="/public/:taskId" element={<Public />} />
         </Routes>
