@@ -4,6 +4,7 @@ import layoutIcon from "./layout.svg";
 import settingsIcon from "./settings.svg";
 import logoutIcon from "./Logout.svg";
 import usersIcon from "./Users.svg";
+import deleteIcon from "./Delete.svg";
 
 export {
   logoIcon,
@@ -12,4 +13,5 @@ export {
   settingsIcon,
   logoutIcon,
   usersIcon,
+  deleteIcon,
 };

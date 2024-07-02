@@ -64,4 +64,47 @@ const GetUsers = async () => {
   }
 };
 
-export { RegisterUser, LoginUser, AddUser, GetUsers };
+const UpdateUserDetails = async (
+  name,
+  email,
+  oldPassword,
+  newPassword,
+  userId
+) => {
+  try {
+    const response = await axios.patch(`${BASE_URI}/user/update`, {
+      name,
+      email,
+      oldPassword,
+      newPassword,
+    });
+
+    return response;
+  } catch (error) {
+    showToast(
+      error.response?.data?.message || "Something Went Wrong!",
+      "error"
+    );
+  }
+};
+
+const getUserDetails = async () => {
+  try {
+    const response = await axios.get(`${BASE_URI}/user/details/`);
+    return response.data;
+  } catch (error) {
+    showToast(
+      error.response?.data?.message || "Something Went Wrong!",
+      "error"
+    );
+  }
+};
+
+export {
+  RegisterUser,
+  LoginUser,
+  AddUser,
+  GetUsers,
+  UpdateUserDetails,
+  getUserDetails,
+};

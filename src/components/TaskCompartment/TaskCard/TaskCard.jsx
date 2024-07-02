@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import styles from "./TaskCard.module.css";
 import { format, isPast } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
 // API Functions
-import { updateTaskStatus, deleteTask } from "../../../api/Task";
+import {
+  updateTaskStatus,
+  deleteTask,
+  getFilteredIds,
+} from "../../../api/Task";
 
 // Icons
 import { FiMoreHorizontal } from "react-icons/fi";
@@ -11,8 +16,9 @@ import { IoIosArrowDown } from "react-icons/io";
 
 // Components
 import CheckList from "./CheckList/CheckList";
-import { promiseToast } from "../../Toast/Toast";
+import { promiseToast, showToast } from "../../Toast/Toast";
 import ConfirmDialog from "../../ConfirmDialog/ConfirmDialog";
+import TaskCardModel from "../TaskCardModel/TaskCardModel";
 
 const transformKey = (key) => key.replace(/\s+/g, "").toLowerCase();
 
@@ -23,14 +29,30 @@ function TaskCard({
   expandedTasks,
   setExpandedTasks,
   setIsLoading,
+  filterValue,
 }) {
+  const navigate = useNavigate();
   const [isModelOpen, setIsModelOpen] = useState(false);
   const [localTask, setLocalTask] = useState(task);
   const [showOptions, setShowOptions] = useState(false);
+  const [isTaskCardModelOpen, setIsTaskCardModelOpen] = useState(false);
+  const [filteredIds, setFilteredIds] = useState([]);
 
   useEffect(() => {
     setLocalTask(task);
   }, [task]);
+
+  const fetchTasks = useCallback(() => {
+    getTasks();
+  }, [getTasks]);
+
+  useEffect(() => {
+    fetchTasks();
+  }, [isTaskCardModelOpen, filteredIds, fetchTasks]);
+
+  useEffect(() => {
+    fetchTasks();
+  }, [isTaskCardModelOpen]);
 
   const updateTaskChecklist = (updatedChecklists) => {
     setLocalTask({
@@ -40,13 +62,15 @@ function TaskCard({
   };
 
   const handleTaskStatusChange = (taskStatus, taskId) => {
+    setIsLoading(true);
     const response = updateTaskStatus(taskStatus, taskId)
       .then((response) => {
-        getTasks();
+        fetchTasks();
         setIsLoading(false);
         return response;
       })
       .catch((error) => {
+        setIsLoading(false);
         throw error;
       });
     promiseToast(response, {
@@ -105,28 +129,45 @@ function TaskCard({
 
   const handleTaskDeleteClick = () => {
     setIsModelOpen(true);
+    setShowOptions(!showOptions);
   };
 
   const deleteTaskOnConfirm = () => {
-    try {
-      const response = deleteTask(localTask._id)
-        .then((response) => {
-          getTasks();
-          console.log(response);
-          return response;
-        })
-        .catch((error) => {
-          throw error;
-        });
-
-      promiseToast(response, {
-        pending: "Deleting Task...",
-        success: "Task deleted successfully",
+    const response = deleteTask(localTask._id)
+      .then((response) => {
+        fetchTasks();
+        return response;
+      })
+      .catch((error) => {
+        throw error;
       });
-    } catch (error) {
-      throw error;
-    }
+
+    promiseToast(response, {
+      pending: "Deleting Task...",
+      success: "Task deleted successfully",
+    });
   };
+
+  const handleEditClick = () => {
+    setIsTaskCardModelOpen(true);
+    setShowOptions(!showOptions);
+  };
+
+  const handleShareClick = (taskId) => {
+    navigator.clipboard.writeText(
+      `${import.meta.env.VITE_SERVER_URI}/public/${taskId}`
+    );
+    setShowOptions(!showOptions);
+    showToast("Link Copied", "success");
+  };
+
+  useEffect(() => {
+    getFilteredIds(filterValue.toLowerCase()).then((response) => {
+      setFilteredIds(response.taskIds);
+    });
+  }, [filterValue]);
+
+  if (!filteredIds.includes(localTask._id)) return null;
 
   return (
     <>
@@ -135,11 +176,23 @@ function TaskCard({
           <div className={styles.taskPriorityAndActionsContainer}>
             <div
               className={`${styles.moreOptionsCard} ${
-                !showOptions ? styles.moreOptionsHide : null
+                showOptions ? styles.moreOptionsShow : ""
               }`}
             >
-              <span className={styles.moreOptionsSpan}>Edit</span>
-              <span className={styles.moreOptionsSpan}>Share</span>
+              <span
+                className={styles.moreOptionsSpan}
+                onClick={handleEditClick}
+              >
+                Edit
+              </span>
+              <span
+                className={styles.moreOptionsSpan}
+                onClick={() => {
+                  handleShareClick(localTask._id);
+                }}
+              >
+                Share
+              </span>
               <span
                 className={styles.moreOptionsSpan}
                 onClick={handleTaskDeleteClick}
@@ -184,7 +237,7 @@ function TaskCard({
                 className={`${styles.checkListExpandIcon} ${
                   isExpanded(localTask.status, localTask._id)
                     ? styles.checkListCollapseIcon
-                    : null
+                    : ""
                 }`}
                 onClick={() =>
                   handleExpandClick(localTask.status, localTask._id)
@@ -198,7 +251,7 @@ function TaskCard({
             className={`${styles.checkListContainer} ${
               isExpanded(localTask.status, localTask._id)
                 ? styles.checkListContainerExpanded
-                : null
+                : ""
             }`}
           >
             <CheckList
@@ -207,22 +260,29 @@ function TaskCard({
               updateTaskChecklist={updateTaskChecklist}
             />
           </div>
+          {isTaskCardModelOpen && (
+            <TaskCardModel
+              setIsTaskCardModelOpen={setIsTaskCardModelOpen}
+              taskDetails={localTask}
+              updateTaskChecklist={updateTaskChecklist}
+            />
+          )}
         </div>
         <div className={styles.taskDueDateAndStatusContainer}>
           <div className={styles.taskDueDateContainer}>
-            {localTask.dueDate ? (
+            {localTask.dueDate && (
               <span
                 className={`${styles.taskDueDate} ${
                   localTask.status === "DONE"
                     ? styles.taskCompleted
                     : isPast(new Date(localTask.dueDate))
                     ? styles.taskInCompleted
-                    : null
+                    : ""
                 }`}
               >
                 {format(new Date(localTask.dueDate), "LLL do")}
               </span>
-            ) : null}
+            )}
           </div>
           <div className={styles.taskStatusContainer}>
             {compartmentType.map((type, index) =>

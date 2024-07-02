@@ -63,8 +63,6 @@ function Dashboard() {
     });
   };
 
-  console.log(value);
-
   return (
     <>
       <div className={styles.mainContainer}>
@@ -98,7 +96,7 @@ function Dashboard() {
           </div>
         </div>
         <div className={styles.tasksContainer}>
-          <Tasks />
+          <Tasks filterValue={filterValue} />
         </div>
       </div>
       <div

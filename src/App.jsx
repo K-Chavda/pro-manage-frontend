@@ -7,6 +7,7 @@ import UserAuth from "./pages/UserAuthPage/UserAuth";
 import Dashboard from "./pages/DashboardPage/Dashboard";
 import Analytics from "./pages/AnalyticsPage/Analytics";
 import Settings from "./pages/SettingsPage/Settings";
+import Public from "./pages/PublicPage/Public";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="analytics" element={<Analytics />} />
             <Route path="settings" element={<Settings />} />
           </Route>
+          <Route path="/public/:taskId" element={<Public />} />
         </Routes>
       </BrowserRouter>
       <ToastContainerComponent />

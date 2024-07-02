@@ -4,7 +4,15 @@ import styles from "./Input.module.css";
 // Icons
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 
-function Input({ type, name, placeholder, value, onChange, icon }) {
+function Input({
+  type,
+  name,
+  placeholder,
+  value,
+  onChange,
+  icon,
+  readonly = false,
+}) {
   const [showPassword, setShowPassword] = React.useState(type === "password");
 
   const handleClick = () => {
@@ -22,6 +30,7 @@ function Input({ type, name, placeholder, value, onChange, icon }) {
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        readOnly={readonly}
       />
       {type === "password" && (
         <span className={styles.showPassword} onClick={handleClick}>

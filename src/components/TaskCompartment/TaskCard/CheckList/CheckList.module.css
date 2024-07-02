@@ -48,3 +48,16 @@
   border-width: 0 2px 2px 0;
   transform: translate(-50%, -50%) rotate(45deg);
 }
+
+.taskCheckListInput {
+  border: none;
+  height: 100%;
+  width: 100%;
+}
+
+.taskCheckListInput:focus {
+  border: none;
+  outline: none;
+  height: 100%;
+  width: 100%;
+}

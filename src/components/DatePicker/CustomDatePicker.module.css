@@ -1,0 +1,46 @@
+input[type="date"] {
+  position: relative;
+  width: 10vw;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: transparent;
+  background: none;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+input[type="date"]::-webkit-calendar-picker {
+  color: red;
+}
+
+input[type="date"]:before {
+  color: transparent;
+  background-color: #fff;
+  display: block;
+  content: attr(placeholder);
+  /* content: "Select Due Date"; */
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: auto;
+  left: auto;
+  color: #999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dueDate {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid #e2e2e2;
+  color: #707070;
+}

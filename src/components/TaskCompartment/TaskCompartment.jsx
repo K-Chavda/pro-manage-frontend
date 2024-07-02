@@ -12,7 +12,13 @@ import TaskCardModel from "./TaskCardModel/TaskCardModel";
 
 const transformKey = (key) => key.replace(/\s+/g, "").toLowerCase();
 
-function TaskCompartment({ compartmentTypes, allTasks, getTasks }) {
+function TaskCompartment({
+  compartmentTypes,
+  allTasks,
+  getTasks,
+  filterValue,
+}) {
+  const [isTaskCardModelOpen, setIsTaskCardModelOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [expandedTasks, setExpandedTasks] = useState(() => {
     const storedExpandedTasks = localStorage.getItem("expandedTasks");
@@ -44,7 +50,9 @@ function TaskCompartment({ compartmentTypes, allTasks, getTasks }) {
     return acc;
   }, {});
 
-  const handleTaskAddClick = () => {};
+  const handleTaskAddClick = () => {
+    setIsTaskCardModelOpen(true);
+  };
 
   return (
     <>
@@ -58,7 +66,7 @@ function TaskCompartment({ compartmentTypes, allTasks, getTasks }) {
                   <span className={styles.status}>{type}</span>
                 </div>
                 <div className={styles.actionsContainer}>
-                  {type.toUpperCase() === "TODO" && (
+                  {type.toUpperCase() === "TO DO" && (
                     <span
                       className={styles.actions}
                       onClick={handleTaskAddClick}
@@ -87,6 +95,7 @@ function TaskCompartment({ compartmentTypes, allTasks, getTasks }) {
                       expandedTasks={expandedTasks}
                       setExpandedTasks={setExpandedTasks}
                       setIsLoading={setIsLoading}
+                      filterValue={filterValue}
                     />
                   ))
                 )}
@@ -94,7 +103,12 @@ function TaskCompartment({ compartmentTypes, allTasks, getTasks }) {
             </div>
           );
         })}
-      <TaskCardModel />
+      {isTaskCardModelOpen ? (
+        <TaskCardModel
+          setIsTaskCardModelOpen={setIsTaskCardModelOpen}
+          getTasks={getTasks}
+        />
+      ) : null}
     </>
   );
 }

@@ -1,0 +1,299 @@
+@import url("../../index.css");
+
+.mainContainer {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 2rem;
+  gap: 2rem;
+  cursor: default;
+  user-select: none;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  color: #707070;
+}
+
+.logoIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.logoutIcon img {
+  height: 24px;
+  width: 24px;
+}
+
+.logoText {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.publicTaskContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2rem;
+  width: 40%;
+  height: 80%;
+  border: 2px solid #edf5fe;
+  border-radius: 10px;
+  padding: 3rem 2rem;
+}
+
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+  min-height: 10%;
+}
+
+.priorityContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.priorityIcon {
+  height: 10px;
+  width: 10px;
+  background-color: #ff2473;
+  border-radius: 10rem;
+}
+
+.priorityText {
+  font-size: 8px;
+  font-weight: 500;
+  color: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.titleText {
+  font-size: 22px;
+  font-weight: 500;
+  color: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.checkListsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+  max-height: 50vh;
+  min-height: 75%;
+  border-radius: 10px;
+  overflow-y: scroll;
+}
+
+.taskCheckList {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #e2e2e2;
+}
+
+.taskCheckListLabel {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.checkList {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 2px solid #e2e2e2;
+  border-radius: 6px;
+  width: 18px;
+  height: 18px;
+  position: relative;
+  outline: none;
+}
+
+.checkList:checked {
+  background-color: #17a2b8;
+  border-color: #e2e2e2;
+}
+
+.checkList:checked::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - 2px);
+  left: 50%;
+  width: 4px;
+  height: 8px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.taskCheckListInput {
+  border: none;
+  height: 100%;
+  width: 100%;
+}
+
+.taskCheckListInput:focus {
+  border: none;
+  outline: none;
+  height: 100%;
+  width: 100%;
+}
+
+.dueDateContainer {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  min-height: 10%;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.taskDueDatSpan {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 30px;
+  padding: 10px;
+  background-color: #cf3636;
+  color: #fff;
+  border-radius: 8px;
+}
+
+/* For Mobile Portrait View */
+@media screen and (max-width: 480px) {
+  .publicTaskContainer {
+    width: 100%;
+    height: 100%;
+  }
+
+  .checkListsContainer {
+    width: 100%;
+    max-height: 50vh; /* Adjust as needed for your layout */
+    overflow-y: auto; /* Use 'auto' to show scrollbars only when necessary */
+    padding-right: 15px; /* Compensate for scrollbar space */
+  }
+
+  .taskCheckList {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #e2e2e2;
+  }
+
+  .taskCheckListLabel {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .checkList {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 2px solid #e2e2e2;
+    border-radius: 6px;
+    width: 18px;
+    height: 18px;
+    position: relative;
+    outline: none;
+  }
+
+  .checkList:checked {
+    background-color: #17a2b8;
+    border-color: #e2e2e2;
+  }
+
+  .checkList:checked::after {
+    content: "";
+    position: absolute;
+    top: calc(50% - 2px);
+    left: 50%;
+    width: 4px;
+    height: 8px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  .taskCheckListInput {
+    border: none;
+    height: 100%;
+    width: 100%;
+  }
+
+  .taskCheckListInput:focus {
+    border: none;
+    outline: none;
+    height: 100%;
+    width: 100%;
+  }
+
+  .dueDateContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    min-height: 10%;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .taskDueDatSpan {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 30px;
+    padding: 10px;
+    background-color: #cf3636;
+    color: #fff;
+    border-radius: 8px;
+  }
+}

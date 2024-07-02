@@ -7,7 +7,12 @@ import { updateCheckList } from "../../../../api/Task";
 // Components
 import { promiseToast } from "../../../Toast/Toast";
 
-function CheckList({ checkLists, taskId, updateTaskChecklist }) {
+function CheckList({
+  checkLists,
+  taskId,
+  updateTaskChecklist,
+  handleCreateChecklistItem,
+}) {
   const [localCheckLists, setLocalCheckLists] = useState(checkLists);
   const optimisticUpdates = useRef({});
 
