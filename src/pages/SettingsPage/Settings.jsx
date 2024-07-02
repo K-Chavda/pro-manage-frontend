@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Settings.module.css";
+import { useNavigate } from "react-router-dom";
 
 // API Functions
 import { UpdateUserDetails, getUserDetails } from "../../api/UserAuth";
@@ -12,6 +13,7 @@ import { CiLock, CiMail, CiUser } from "react-icons/ci";
 import { promiseToast, showToast } from "../../components/Toast/Toast";
 
 function Setting() {
+  const navigate = useNavigate();
   const [value, setValue] = useState({
     name: "",
     email: "",
@@ -54,7 +56,7 @@ function Setting() {
   };
 
   const handleUpdateClick = () => {
-    if (value.oldPassword === value.newPassword) {
+    if (value.oldPassword && value.oldPassword === value.newPassword) {
       showToast("Please enter your new password", "error");
       return;
     }
@@ -69,6 +71,8 @@ function Setting() {
         .then((response) => {
           console.log(response);
           showToast("User Details Updated Successfully", "success");
+          localStorage.clear();
+          navigate("/");
           return response;
         })
         .catch((error) => {
@@ -82,8 +86,6 @@ function Setting() {
       console.error("Error updating user details:", error);
     }
   };
-
-  console.log(value);
 
   return (
     <>

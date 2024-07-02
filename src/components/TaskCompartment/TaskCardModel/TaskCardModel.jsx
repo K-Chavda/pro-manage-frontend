@@ -107,12 +107,13 @@ const TaskCardModel = ({
     }
 
     // Check each checklist item for title
-    for (const item of checklist) {
-      if (!item.title.trim()) {
-        showToast("Please Enter a Checklist Title", "error");
-        return false;
+    if (checklist)
+      for (const item of checklist) {
+        if (!item.title.trim()) {
+          showToast("Please Enter a Checklist Title", "error");
+          return false;
+        }
       }
-    }
 
     return true;
   };
@@ -125,6 +126,7 @@ const TaskCardModel = ({
     try {
       const taskPayload = {
         ...taskData,
+        dueDate: dueDate,
         status: taskData.status || "TO DO",
       };
 
@@ -149,7 +151,6 @@ const TaskCardModel = ({
 
         const response = await updateTask({
           ...taskPayload,
-          dueDate: dueDate,
           taskId: taskDetails._id,
         });
 

@@ -513,6 +513,12 @@
   color: #ffffff;
 }
 
+.primaryButton:hover {
+  cursor: pointer;
+  background-color: #178a9c;
+  color: #ffffff;
+}
+
 .taskCheckList {
   width: 100%;
   display: flex;
