@@ -35,17 +35,15 @@ const TaskCardModel = ({
   getTasks,
 }) => {
   const [usersList, setUsersList] = useState([]);
-  const [taskData, setTaskData] = useState(
-    taskDetails || {
-      title: "",
-      priority: "",
-      assignedTo: "",
-      dueDate: "",
-    }
-  );
+  const [taskData, setTaskData] = useState({
+    title: taskDetails.title || "",
+    priority: taskDetails.priority || "",
+    assignedTo: taskDetails.assignedTo || "",
+    dueDate: taskDetails.dueDate || "",
+  });
   const [showUsersList, setShowUsersList] = useState(false);
   const [checklist, setChecklist] = useState([]);
-  const [dueDate, setDueDate] = useState("");
+  const [dueDate, setDueDate] = useState(taskDetails.dueDate || "");
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -154,6 +152,7 @@ const TaskCardModel = ({
           const updateCheckListPromise = updateTaskCheckList(
             response.task._id
           ).then((response) => {
+            getTasks();
             setIsTaskCardModelOpen(false);
             return response;
           });
@@ -170,6 +169,7 @@ const TaskCardModel = ({
           const createCheckListPromise = createTaskCheckList(
             response.data.newTask._id
           ).then((response) => {
+            getTasks();
             setIsTaskCardModelOpen(false);
             return response;
           });
@@ -212,12 +212,13 @@ const TaskCardModel = ({
 
   const handleAddCheckListButtonClick = async () => {
     const newItem = {
+      _id: nanoid(),
       title: " ",
       isCompleted: false,
     };
 
     if (!taskData._id) {
-      setChecklist([newItem]);
+      setChecklist([...checklist, newItem]);
     } else {
       await createCheckList(
         taskData._id,
