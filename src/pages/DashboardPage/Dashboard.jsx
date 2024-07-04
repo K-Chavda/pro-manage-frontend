@@ -69,7 +69,9 @@ function Dashboard() {
         <div className={styles.infoContainer}>
           <div className={styles.userNameAndHeadingContainer}>
             <div className={styles.userNameContainer}>
-              <span className={styles.userName}>Welcome! Name</span>
+              <span className={styles.userName}>
+                Welcome! {localStorage.getItem("name")}
+              </span>
             </div>
             <div className={styles.headingContainer}>
               <span className={styles.heading}>Board</span>
