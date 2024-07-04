@@ -247,13 +247,13 @@ const TaskCardModel = ({
 
   const handleCheckListDeleteClick = async (taskId, checkListId) => {
     try {
-      await deleteCheckList(taskId, checkListId);
+      if (taskId) await deleteCheckList(taskId, checkListId);
 
       setChecklist((prevChecklist) =>
         prevChecklist.filter((item) => item._id !== checkListId)
       );
     } catch (error) {
-      console.error("Error deleting checklist item:", error);
+      // console.error("Error deleting checklist item:", error);
     }
   };
 

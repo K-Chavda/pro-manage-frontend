@@ -134,6 +134,7 @@ const deleteCheckList = async (taskId, checkListId) => {
     );
     return response;
   } catch (error) {
+    console.log(error);
     showToast(
       error.response?.data?.message || "Something Went Wrong!",
       "error"
