@@ -253,7 +253,7 @@ const TaskCardModel = ({
         prevChecklist.filter((item) => item._id !== checkListId)
       );
     } catch (error) {
-      // console.error("Error deleting checklist item:", error);
+      console.error("Error deleting checklist item:", error);
     }
   };
 
